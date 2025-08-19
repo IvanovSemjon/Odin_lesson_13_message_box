@@ -1,7 +1,6 @@
 import logging
 import colorlog
 
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
 handler = colorlog.StreamHandler()
 handler.setFormatter(colorlog.ColoredFormatter(
@@ -15,8 +14,10 @@ handler.setFormatter(colorlog.ColoredFormatter(
     }
 ))
 
-logger = colorlog.getLogger()
+logger = colorlog.getLogger('example')
 logger.addHandler(handler)
+logger.setLevel(logging.DEBUG)
+logger.propagate = False # Отключаем передачу в родительский лог
 
 logger.debug('Подробная информация для отладки')   # DEBUG
 logger.info('Информационное сообщение')            # INFO
