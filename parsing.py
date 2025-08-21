@@ -75,5 +75,17 @@ def parse_drom_premium_cars():
         return pd.DataFrame()
 
 
+def save_df_to_notebook(df, filename='cars_data.txt'):
+    with open(filename, 'w', encoding='utf-8') as f:
+        f.write("Данные об автомобилях из спецразмещения\n")
+        f.write("=" * 50 + "\n\n")
+        f.write(df.to_string(index=False))
+        f.write("\n\nВсего найдено автомобилей: " + str(len(df)))
+    print(f"Данные сохранены в файл {filename}")
+
 df = parse_drom_premium_cars()
+if not df.empty:
+    save_df_to_notebook(df)
+else:
+    print("Нет данных для сохранения")
 
